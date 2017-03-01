@@ -84,6 +84,40 @@ namespace Cookbook
             }
         }
 
+        public static Category Find(int id)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM categories WHERE id = @CategoryId", conn);
+
+            SqlParameter categoryIdParameter = new SqlParameter("@CategoryId", id.ToString());
+            cmd.Parameters.Add(categoryIdParameter);
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int foundCategoryId = 0;
+            string foundCategoryStyle = null;
+
+            while(rdr.Read())
+            {
+                foundCategoryId = rdr.GetInt32(0);
+                foundCategoryStyle = rdr.GetString(1);
+            }
+
+            Category foundCategory = new Category(foundCategoryStyle, foundCategoryId);
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            return foundCategory;
+        }
+
 
         public static void DeleteAll()
         {

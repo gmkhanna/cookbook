@@ -29,6 +29,21 @@ namespace Cookbook
             //Assert
             Assert.Equal(testId, result);
         }
+
+        [Fact]
+       public void Test_Find_FindsCategoryInDatabase()
+       {
+           //Arrange
+           Category firstCategory = new Category("Salmon");
+           firstCategory.Save();
+
+           //Act
+           Category result = Category.Find(firstCategory.GetId());
+
+           //Assert
+           Assert.Equal(firstCategory, result);
+       }
+
         public void Dispose()
         {
             Category.DeleteAll();
