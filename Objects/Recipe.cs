@@ -176,7 +176,7 @@ namespace Cookbook
             cmd.Parameters.Add(recipeIdParameter);
 
 
-            List<Category> categories = new List<Category> {};
+            List<Category> categoryList = new List<Category> {};
 
             SqlDataReader rdr = cmd.ExecuteReader();
 
@@ -186,7 +186,7 @@ namespace Cookbook
                 string CategoryStyle = rdr.GetString(1);
 
                 Category newCategory = new Category(CategoryStyle, CategoryId);
-                categories.Add(newCategory);
+                categoryList.Add(newCategory);
             }
             if (rdr != null)
             {
@@ -196,8 +196,7 @@ namespace Cookbook
             {
                 conn.Close();
             }
-            return categories;
-
+            return categoryList;
         }
 
         public static void DeleteAll()

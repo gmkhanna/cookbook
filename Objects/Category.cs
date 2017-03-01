@@ -120,7 +120,7 @@ namespace Cookbook
 
         public void AddRecipe(Recipe newRecipe)
         {
-            SqlConnection conn = DB.Onnection();
+            SqlConnection conn = DB.Connection();
             conn.Open();
 
             SqlCommand cmd = new SqlCommand("INSERT INTO cookbook (recipe_id, category_id) VALUES (@RecipeId, @CategoryId);", conn);
@@ -139,26 +139,41 @@ namespace Cookbook
             }
 
         }
-            public static List<Recipe> GetRecipes()
+            public List<Recipe> GetRecipes()
             {
                 SqlConnection conn = DB.Connection();
                 conn.Open();
 
                 SqlCommand cmd = new SqlCommand("SELECT recipes.* FROM categories JOIN cookbook ON (categories.id = cookbook.category_id) JOIN recipes ON (cookbook.recipe_id = recipes.id) WHERE categories.id = @CategoryId;", conn);
-                while (rdr.Read())
 
+                SqlParameter idCategoryParam = new SqlParameter("@CategoryId", this.GetId().ToString());
+
+                cmd.Parameters.Add(idCategoryParam);
+
+                List<Recipe> recipeList = new List<Recipe> {};
+
+                SqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
                 {
                     int recipeId = rdr.GetInt32(0);
-                    string recipeName = rdr.Getstring(1);
-                    string recipeInstructions = rdr.Getstring(2);
-                    string recipeIngredients = rdr.Getstring(3);
-                    string recipeRating = rdr.Getstring(4);
+                    string recipeName = rdr.GetString(1);
+                    string recipeInstructions = rdr.GetString(2);
+                    string recipeIngredients = rdr.GetString(3);
+                    string recipeRating = rdr.GetString(4);
+                    Recipe newRecipe = new Recipe(recipeName, recipeInstructions, recipeIngredients, recipeRating, recipeId);
+                    recipeList.Add(newRecipe);
                 }
 
                 if (rdr != null)
                 {
                     rdr.Close();
                 }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+                return recipeList;
             }
 
 

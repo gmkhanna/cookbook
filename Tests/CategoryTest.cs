@@ -51,14 +51,14 @@ namespace Cookbook
             Category testCategory = new Category("Spicy");
             testCategory.Save();
 
-            Category testCategory = new Category("Salmon", "Salmon", "Boil", "3");
-            testCategory.Save();
+            Recipe testRecipe = new Recipe("Salmon", "Salmon", "Boil", "3");
+            testRecipe.Save();
 
             //Act
-            testCategory.AddCategory(testCategory);
+            testCategory.AddRecipe(testRecipe);
 
-            List<Category> result = testCategory.GetCategories();
-            List<Category> testList = new List<Category>{testCategory};
+            List<Recipe> result = testCategory.GetRecipes();
+            List<Recipe> testList = new List<Recipe>{testRecipe};
 
             //Assert
             Assert.Equal(testList, result);
