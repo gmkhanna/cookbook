@@ -118,6 +118,49 @@ namespace Cookbook
             return foundCategory;
         }
 
+        public void AddRecipe(Recipe newRecipe)
+        {
+            SqlConnection conn = DB.Onnection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("INSERT INTO cookbook (recipe_id, category_id) VALUES (@RecipeId, @CategoryId);", conn);
+
+            SqlParameter idRecipeParam = new SqlParameter("@RecipeId", newRecipe.GetId());
+            SqlParameter idCategoryParam = new SqlParameter("@CategoryId", this.GetId());
+
+            cmd.Parameters.Add(idRecipeParam);
+            cmd.Parameters.Add(idCategoryParam);
+
+            cmd.ExecuteNonQuery();
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+
+        }
+            public static List<Recipe> GetRecipes()
+            {
+                SqlConnection conn = DB.Connection();
+                conn.Open();
+
+                SqlCommand cmd = new SqlCommand("SELECT recipes.* FROM categories JOIN cookbook ON (categories.id = cookbook.category_id) JOIN recipes ON (cookbook.recipe_id = recipes.id) WHERE categories.id = @CategoryId;", conn);
+                while (rdr.Read())
+
+                {
+                    int recipeId = rdr.GetInt32(0);
+                    string recipeName = rdr.Getstring(1);
+                    string recipeInstructions = rdr.Getstring(2);
+                    string recipeIngredients = rdr.Getstring(3);
+                    string recipeRating = rdr.Getstring(4);
+                }
+
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+            }
+
 
         public static void DeleteAll()
         {
