@@ -77,23 +77,12 @@ namespace Cookbook
 
             SqlCommand cmd = new SqlCommand("INSERT INTO recipes (name, ingredients, instructions, rating) OUTPUT INSERTED.id VALUES (@RecipeName, @RecipeIngredients, @RecipeInstructions, @RecipeRating)", conn);
 
-            SqlParameter nameParameter = new SqlParameter();
-            nameParameter.ParameterName = "@RecipeName";
-            nameParameter.Value = this.GetName();
+            SqlParameter styleParameter = new SqlParameter("@RecipeName", this.GetName());
+            SqlParameter ingredientsParameter = new SqlParameter("@RecipeIngredients", this.GetIngredients());
+            SqlParameter instructionsParameter = new SqlParameter("@RecipeInstructions", this.GetInstructions());
+            SqlParameter ratingParameter = new SqlParameter("@RecipeRating", this.GetRating());
 
-            SqlParameter ingredientsParameter = new SqlParameter();
-            ingredientsParameter.ParameterName = "@RecipeIngredients";
-            ingredientsParameter.Value = this.GetIngredients();
-
-            SqlParameter instructionsParameter = new SqlParameter();
-            instructionsParameter.ParameterName = "@RecipeInstructions";
-            instructionsParameter.Value = this.GetInstructions();
-
-            SqlParameter ratingParameter = new SqlParameter();
-            ratingParameter.ParameterName = "@RecipeRating";
-            ratingParameter.Value = this.GetRating();
-
-            cmd.Parameters.Add(nameParameter);
+            cmd.Parameters.Add(styleParameter);
             cmd.Parameters.Add(ingredientsParameter);
             cmd.Parameters.Add(instructionsParameter);
             cmd.Parameters.Add(ratingParameter);
@@ -115,10 +104,6 @@ namespace Cookbook
         }
 
 
-        // public override int GetHashCode()
-        // {
-        //     return this.GetName().GetHashCode();
-        // }
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();
