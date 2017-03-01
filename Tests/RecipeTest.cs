@@ -29,6 +29,21 @@ namespace Cookbook
             //Assert
             Assert.Equal(testId, result);
         }
+
+        [Fact]
+       public void Test_FindFindsRecipeInDatabase()
+       {
+           //Arrange
+           Recipe firstRecipe = new Recipe("Salmon", "Salmon", "Boil", "3");
+           firstRecipe.Save();
+
+           //Act
+           Recipe result = Recipe.Find(firstRecipe.GetId());
+
+           //Assert
+           Assert.Equal(firstRecipe, result);
+       }
+
         public void Dispose()
         {
             Recipe.DeleteAll();

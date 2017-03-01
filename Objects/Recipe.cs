@@ -103,6 +103,45 @@ namespace Cookbook
             }
         }
 
+        public static Recipe Find(int id)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM recipes WHERE id = @RecipeId", conn);
+
+            SqlParameter recipeIdParameter = new SqlParameter("@RecipeId", id.ToString());
+
+            cmd.Parameters.Add(recipeIdParameter);
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int foundRecipeId = 0;
+            string foundRecipeName = null;
+            string foundRecipeIngredients = null;
+            string foundRecipeInstructions = null;
+            string foundRecipeRating = null;
+
+            while(rdr.Read())
+            {
+                foundRecipeId = rdr.GetInt32(0);
+                foundRecipeName = rdr.GetString(1);
+                foundRecipeIngredients = rdr.GetString(2);
+                foundRecipeInstructions = rdr.GetString(3);
+                foundRecipeRating = rdr.GetString(4);
+            }
+            Recipe foundRecipe = new Recipe(foundRecipeName, foundRecipeIngredients, foundRecipeInstructions, foundRecipeRating, foundRecipeId);
+
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            return foundRecipe;
+        }
 
         public static void DeleteAll()
         {
