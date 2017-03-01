@@ -44,6 +44,26 @@ namespace Cookbook
            Assert.Equal(firstRecipe, result);
        }
 
+       [Fact]
+        public void Test_AddCategory_AddsCategoryToRecipe()
+        {
+            //Arrange
+            Recipe testRecipe = new Recipe("Salmon", "Salmon", "Boil", "3");
+            testRecipe.Save();
+
+            Category testCategory = new Category("Soup");
+            testCategory.Save();
+
+            //Act
+            testRecipe.AddCategory(testCategory);
+
+            List<Category> result = testRecipe.GetCategories();
+            List<Category> testList = new List<Category>{testCategory};
+
+            //Assert
+            Assert.Equal(testList, result);
+        }
+
         public void Dispose()
         {
             Recipe.DeleteAll();

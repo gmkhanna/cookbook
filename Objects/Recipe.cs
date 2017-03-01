@@ -143,6 +143,63 @@ namespace Cookbook
             return foundRecipe;
         }
 
+        public void AddCategory(Category newCategory)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("INSERT INTO cookbook (recipe_id, category_id) VALUES (@RecipeId, @CategoryId)", conn);
+
+            SqlParameter recipeIdParameter = new SqlParameter("@RecipeId", this.GetId());
+            SqlParameter categoryIdParameter = new SqlParameter("@CategoryId", newCategory.GetId());
+
+            cmd.Parameters.Add(recipeIdParameter);
+            cmd.Parameters.Add(categoryIdParameter);
+
+            cmd.ExecuteNonQuery();
+
+            if (conn != null);
+            {
+                conn.Close();
+            }
+        }
+
+        public List<Category> GetCategories()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT categories.* FROM recipes JOIN cookbook ON (recipes.id = cookbook.recipe_id) JOIN categories ON (cookbook.category_id = categories.id) WHERE recipes.id = @RecipeId;", conn);
+
+            SqlParameter recipeIdParameter = new SqlParameter("@RecipeId", this.GetId().ToString());
+
+            cmd.Parameters.Add(recipeIdParameter);
+
+
+            List<Category> categories = new List<Category> {};
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                int CategoryId = rdr.GetInt32(0);
+                string CategoryStyle = rdr.GetString(1);
+
+                Category newCategory = new Category(CategoryStyle, CategoryId);
+                categories.Add(newCategory);
+            }
+            if (rdr != null)
+            {
+                rdr.Close();
+            }
+            if (conn != null)
+            {
+                conn.Close();
+            }
+            return categories;
+
+        }
+
         public static void DeleteAll()
         {
             SqlConnection conn = DB.Connection();
