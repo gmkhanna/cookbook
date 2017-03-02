@@ -1,9 +1,8 @@
 @{
     Layout = "Shared/_Layout.cshtml";
 }
-<h2>Add new category</h2>
+<h4>Add new category</h4>
 <form action="/categories/new" method="post">
-  <label for="category-name">category name:</label>
-  <input id="category-name" name="category-name" type="text">
-  <button type="submit">Add</button>
+  <input id="category-name" name="category-name" type="text" placeholder="Category Name">
+  <button type="submit" class="hollow button success">Add</button>
 </form>

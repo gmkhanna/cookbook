@@ -3,13 +3,22 @@
 }
 <h2>Add new recipe</h2>
 <form action="/recipes/new" method="post">
-  <label for="recipe-name">Recipe name:</label>
-  <input id="recipe-name" name="recipe-name" type="text">
-  <label for="recipe-ingredients">Recipe ingredients:</label>
-  <input id="recipe-ingredients" name="recipe-ingredients" type="text">
-  <label for="recipe-instructions">Recipe instructions:</label>
-  <input id="recipe-instructions" name="recipe-instructions" type="text">
+  <input id="recipe-name" name="recipe-name" type="text" placeholder="Recipe Name">
+  <textarea id="recipe-ingredients" name="recipe-ingredients" type="text" placeholder="Recipe Ingredients"></textarea>
+  <textarea id="recipe-instructions" name="recipe-instructions" type="text" placeholder="Recipe Instructions"></textarea>
+
+
   <label for="recipe-rating">Recipe rating:</label>
+  @* <div class="small-8 columns">
+  <div class="slider" data-slider data-initial-start="1">
+    <span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput1"></span>
+    <span class="slider-fill" data-slider-fill></span>
+  </div>
+</div>
+<div class="small-2 columns">
+  <input type="number" id="sliderOutput1">
+</div> *@
   <input id="recipe-rating" name="recipe-rating" type="text">
-  <button type="submit">Add</button>
+
+  <button type="submit" class="hollow button success">Add</button>
 </form>

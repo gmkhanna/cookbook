@@ -120,6 +120,11 @@ namespace Cookbook
         recipe.AddCategory(category);
         return View["success.cshtml"];
       };
+
+      Post["/searched_recipes"] = _ => {
+        List<Recipe> MatchedRecipes = Recipe.SearchedIngredient(Request.Form["searched-recipes"]);
+        return View["recipes_by_ingredient.cshtml", MatchedRecipes];
+      };
     }
   }
 }

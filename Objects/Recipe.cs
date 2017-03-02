@@ -228,6 +228,44 @@ namespace Cookbook
         conn.Close();
       }
     }
+
+    public static List<Recipe> SearchedIngredient(string queryIngredient)
+    {
+      List<Recipe> MatchedRecipes = new List<Recipe> {};
+
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM recipes;", conn);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        int recipeId = rdr.GetInt32(0);
+        string recipeName = rdr.GetString(1);
+        string recipeIngredients = rdr.GetString(2);
+        string recipeInstructions = rdr.GetString(3);
+        string rating = rdr.GetString(4);
+
+        if (recipeIngredients == queryIngredient)
+        {
+          Recipe searchedIngredient = new Recipe(recipeName, recipeIngredients, recipeInstructions, rating, recipeId);
+          MatchedRecipes.Add(searchedIngredient);
+        }
+      }
+
+      if(rdr != null)
+      {
+        rdr.Close();
+      }
+      if(conn != null)
+      {
+        conn.Close();
+      }
+      return MatchedRecipes;
+    }
+
+
     public void Delete()
     {
       SqlConnection conn = DB.Connection();
