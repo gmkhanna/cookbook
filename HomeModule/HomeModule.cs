@@ -49,7 +49,14 @@ namespace Cookbook
       Patch["/category/{id}/updated"] = parameters => {
                 Category selectedCategory = Category.Find(parameters.id);
                 selectedCategory.Update(Request.Form["category-style"]);
-                return View["categoryUpdated.cshtml"];
+                return View["category_updated.cshtml"];
+            };
+
+            Delete["/categories/{id}/deleted"] = parameters => {
+              Category selectedCategory = Category.Find(parameters.id);
+              selectedCategory.Delete();
+              List<Category> AllCategories = Category.GetAll();
+              return View["categories.cshtml", AllCategories];
             };
 
       //Add a recipe to a category

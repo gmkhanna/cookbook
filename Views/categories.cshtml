@@ -8,12 +8,7 @@
   <ul>
     @foreach (var category in Model)
     {
-      <li><a href="/category/@category.GetId()">@category.GetStyle()</a></li>
-
-      <form action="/category/@category.GetId()/edit">
-      <input type="hidden" name="_method" value="PATCH">
-      <button class="btn btn-warning" type="submit">Edit</button>
-      </form>
+      <li><a href="/category/@category.GetId()">@category.GetStyle()</a> | <a href="/category/@category.GetId()/edit">Edit / Delete</a></li>
     }
   </ul>
 }

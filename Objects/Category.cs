@@ -198,7 +198,7 @@ namespace Cookbook
           SqlConnection conn = DB.Connection();
           conn.Open();
 
-          SqlCommand cmd = new SqlCommand("UPDATE category SET style = @NewStyle OUTPUT INSERTED.style WHERE id = @CategoryId;", conn);
+          SqlCommand cmd = new SqlCommand("UPDATE categories SET style = @NewStyle OUTPUT INSERTED.style WHERE id = @CategoryId;", conn);
 
           SqlParameter newStyleParameter = new SqlParameter();
           newStyleParameter.ParameterName = "@NewStyle";
