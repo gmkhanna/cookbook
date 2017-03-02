@@ -20,7 +20,7 @@
   <input id="category-id" name="category-id" type="hidden" value='@Model["category"].GetId()'>
   <label for="recipe-id">Select a recipe</label>
   <select id="recipe-id" name="recipe-id" type="text">
-    @foreach (var recipe in @Model["AllRecipes"])
+    @foreach (var recipe in @Model["allRecipes"])
     {
       <option value='@recipe.GetId()'>@recipe.GetName()</option>
     }
