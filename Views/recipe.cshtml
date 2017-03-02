@@ -1,0 +1,19 @@
+@{
+    Layout = "Shared/_Layout.cshtml";
+}
+
+<h3>Name: @Model["recipe"].GetName()</h2>
+<p>Ingredients: @Model["recipe"].GetIngredients()</p>
+<p>Instructions: @Model["recipe"].GetInstructions()</p>
+<h3>Rating: @Model["recipe"].GetRating()</h2>
+
+@if (@Model["recipeCategories"].Count != 0)
+{
+  <h4> This recipe is associated with the following categories:</h4>
+  <ul>
+    @foreach(var category in @Model["recipeCategories"])
+    {
+      <li>@category.GetStyle()</li>
+    }
+  </ul>
+}
