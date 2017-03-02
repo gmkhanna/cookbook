@@ -30,7 +30,7 @@ namespace Cookbook
         return View["categories.cshtml", AllCategories];
       };
       //Finds the proper category, and lists the recipes within it. Recipes can be added to this category from here.
-      Get["/categories/{id}"] = parameters => {
+      Get["/category/{id}"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>();
         Category SelectedCategory = Category.Find(parameters.id);
         List<Recipe> CategoryRecipes = SelectedCategory.GetRecipes();
@@ -40,6 +40,17 @@ namespace Cookbook
         model.Add("allRecipes", AllRecipes);
         return View["category.cshtml", model];
       };
+
+      Get["/category/{id}/edit"] = parameters => {
+        Category SelectedCategory = Category.Find(parameters.id);
+        return View["category_edit_form.cshtml", SelectedCategory];
+      };
+
+      Patch["/category/{id}/updated"] = parameters => {
+                Category selectedCategory = Category.Find(parameters.id);
+                selectedCategory.Update(Request.Form["category-style"]);
+                return View["categoryUpdated.cshtml"];
+            };
 
       //Add a recipe to a category
       Post["/recipe_added"] = _ => {

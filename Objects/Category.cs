@@ -176,6 +176,54 @@ namespace Cookbook
                 return recipeList;
             }
 
+            public void Delete()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM categories WHERE id=@CategoryId;", conn);
+
+            SqlParameter idParameter = new SqlParameter("@CategoryId", this.GetId());
+            cmd.Parameters.Add(idParameter);
+            cmd.ExecuteNonQuery();
+
+            if (conn != null)
+            {
+                conn.Close();
+            }
+        }
+
+        public void Update(string newStyle)
+      {
+          SqlConnection conn = DB.Connection();
+          conn.Open();
+
+          SqlCommand cmd = new SqlCommand("UPDATE category SET style = @NewStyle OUTPUT INSERTED.style WHERE id = @CategoryId;", conn);
+
+          SqlParameter newStyleParameter = new SqlParameter();
+          newStyleParameter.ParameterName = "@NewStyle";
+          newStyleParameter.Value = newStyle;
+          cmd.Parameters.Add(newStyleParameter);
+
+          SqlParameter categoryIdParameter = new SqlParameter("@CategoryId", this.GetId());
+          cmd.Parameters.Add(categoryIdParameter);
+          SqlDataReader rdr = cmd.ExecuteReader();
+
+          while(rdr.Read())
+          {
+              this._style = rdr.GetString(0);
+          }
+
+          if (rdr != null)
+          {
+              rdr.Close();
+          }
+          if (conn != null)
+          {
+              conn.Close();
+          }
+      }
+
 
         public static void DeleteAll()
         {
