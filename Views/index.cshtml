@@ -1,27 +1,9 @@
 @{
-  Layout = "Shared/_Layout.cshtml";
+    Layout = "Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <h1>Category Recipes</h1>
-</div>
+<h4><a href="/categories">View Categories</a></h4>
+<h4><a href="/recipes">View Recipes</a></h4>
 
-<div class="row">
-    <div class="col-md-3">
-        <h3>Categories:</h3>
-        @foreach(string recipe in model)
-        {
-            <ul>
-            <li>@model</li>
-            </ul>
-        }
-
-    </div>
-    <div id="show-recipe" class="col-md-5">
-
-
-    </div>
-    <div class="col-md-3">
-
-    </div>
-</div>
+<h4><a href="/categories/new">Add a new category</a></h4>
+<h4><a href="/recipes/new">Add a new recipe</a></h4>
