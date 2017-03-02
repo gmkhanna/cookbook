@@ -7,7 +7,7 @@
   <ul>
     @foreach (var recipe in Model)
     {
-      <li><a href='/recipes/@recipe.GetId()'>@recipe.GetName()</a></li>
+      <li><a href='/recipes/@recipe.GetId()'>@recipe.GetName()</a> | <a href="/recipe/@recipe.GetId()/edit">Edit / Delete</a></li>
     }
   </ul>
 }

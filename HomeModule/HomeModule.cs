@@ -47,17 +47,17 @@ namespace Cookbook
       };
 
       Patch["/category/{id}/updated"] = parameters => {
-                Category selectedCategory = Category.Find(parameters.id);
-                selectedCategory.Update(Request.Form["category-style"]);
-                return View["category_updated.cshtml"];
-            };
+        Category selectedCategory = Category.Find(parameters.id);
+        selectedCategory.Update(Request.Form["category-style"]);
+        return View["category_updated.cshtml"];
+      };
 
-            Delete["/categories/{id}/deleted"] = parameters => {
-              Category selectedCategory = Category.Find(parameters.id);
-              selectedCategory.Delete();
-              List<Category> AllCategories = Category.GetAll();
-              return View["categories.cshtml", AllCategories];
-            };
+      Delete["/categories/{id}/deleted"] = parameters => {
+        Category selectedCategory = Category.Find(parameters.id);
+        selectedCategory.Delete();
+        List<Category> AllCategories = Category.GetAll();
+        return View["categories.cshtml", AllCategories];
+      };
 
       //Add a recipe to a category
       Post["/recipe_added"] = _ => {
@@ -94,6 +94,23 @@ namespace Cookbook
         model.Add("recipeCategories", RecipeCategories);
         model.Add("allCategories", AllCategories);
         return View["recipe.cshtml", model];
+      };
+      Get["/recipe/{id}/edit"] = parameters => {
+        Recipe SelectedRecipe = Recipe.Find(parameters.id);
+        return View["recipe_edit_form.cshtml", SelectedRecipe];
+      };
+
+      Patch["/recipe/{id}/updated"] = parameters => {
+        Recipe selectedRecipe = Recipe.Find(parameters.id);
+        selectedRecipe.Update(Request.Form["recipe-name"]);
+        return View["category_updated.cshtml"];
+      };
+
+      Delete["/recipe/{id}/deleted"] = parameters => {
+        Recipe selectedRecipe = Recipe.Find(parameters.id);
+        selectedRecipe.Delete();
+        List<Recipe> AllRecipes = Recipe.GetAll();
+        return View["recipes.cshtml", AllRecipes];
       };
 
       //This will add a category to te recipe ; then show success page once added.

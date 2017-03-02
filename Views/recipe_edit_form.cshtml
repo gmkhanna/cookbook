@@ -1,0 +1,16 @@
+@{
+    Layout = "Shared/_Layout.cshtml";
+}
+<h2>Edit Recipe</h2>
+<form action="/recipe/@Model.GetId()/updated" method="post">
+  <input type="hidden" name="_method" value="PATCH">
+  <label for="recipe-name">Recipe name:</label>
+  <input id="recipe-name" name="recipe-name" type="text">
+  <button type="submit">Edit</button>
+</form>
+
+<h2>Delete Recipe</h2>
+<form action="/recipe/@Model.GetId()/deleted" method="post">
+  <input type="hidden" name="_method" value="DELETE">
+    <button class="btn btn-danger" type="submit">Delete</button>
+</form>
