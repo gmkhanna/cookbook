@@ -232,6 +232,7 @@ namespace Cookbook
     public static List<Recipe> SearchedIngredient(string queryIngredient)
     {
       List<Recipe> MatchedRecipes = new List<Recipe> {};
+      string[] stringArray;
 
       SqlConnection conn = DB.Connection();
       conn.Open();
@@ -247,10 +248,15 @@ namespace Cookbook
         string recipeInstructions = rdr.GetString(3);
         string rating = rdr.GetString(4);
 
-        if (recipeIngredients == queryIngredient)
+        stringArray = recipeIngredients.Split();
+
+        for (int i = 0; i < stringArray.Length; i++)
         {
+          if (stringArray[i] == queryIngredient)
+          {
           Recipe searchedIngredient = new Recipe(recipeName, recipeIngredients, recipeInstructions, rating, recipeId);
           MatchedRecipes.Add(searchedIngredient);
+          }
         }
       }
 
