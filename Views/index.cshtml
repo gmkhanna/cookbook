@@ -2,13 +2,86 @@
     Layout = "Shared/_Layout.cshtml";
 }
 
-<h4><a href="/categories">View Categories</a></h4>
-<h4><a href="/recipes">View Recipes</a></h4>
+<div class="row">
+  <div class="small-8 large-centered columns">
+  <div class="orbit" role="region" aria-label="Dishes" data-orbit>
+    <ul class="orbit-container">
+        <li class="is-active orbit-slide">
+          <div>
+            <h3 class="text-center">Your Favorite Home Recipes!</h3>
+            <p class="text-center">Add your favorite recipes that you like to eat. The whole family will enjoy them. This is your personal cookbook database.</p>
+          </div>
+        </li>
+      <li class="orbit-slide">
+        <div>
+          <h3 class="text-center">You can also throw some text in here!</h3>
+          <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde harum rem, beatae ipsa consectetur quisquam. Rerum ratione, delectus atque tempore sed, suscipit ullam, beatae distinctio cupiditate ipsam eligendi tempora expedita.</p>
+          <h3 class="text-center">This Orbit slide has chill</h3>
+        </div>
+      </li>
+      <li class="orbit-slide">
+        <div>
+          <h3 class="text-center">You can also throw some text in here!</h3>
+          <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde harum rem, beatae ipsa consectetur quisquam. Rerum ratione, delectus atque tempore sed, suscipit ullam, beatae distinctio cupiditate ipsam eligendi tempora expedita.</p>
+          <h3 class="text-center">This Orbit slide has chill</h3>
+        </div>
+      </li>
+      <li class="orbit-slide">
+        <div>
+          <h3 class="text-center">You can also throw sacascome text in here!</h3>
+          <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde harum rem, beatae ipsa consectetur quisquam. Rerum ratione, delectus atque tempore sed, suscipit ullam, beatae distinctio cupiditate ipsam eligendi tempora expedita.</p>
+          <h3 class="text-center">This Orbit slide has chill</h3>
+        </div>
+      </li>
+    </ul>
+    <nav class="orbit-bullets">
+     <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
+     <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
+     <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
+     <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
+   </nav>
+  </div>
+  </div>
+</div>
 
-<h4><a href="/categories/new">Add a new category</a></h4>
-<h4><a href="/recipes/new">Add a new recipe</a></h4>
+  <div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas>
 
+    <!-- Close button -->
+    <button class="close-button" aria-label="Close menu" type="button" data-close>
+      <span aria-hidden="true">&times;</span>
+    </button>
+
+    <!-- Menu -->
+    <ul class="vertical menu">
+      <li><a href="/categories">Categories</a></li>
+      <li><a href="/recipes">Recipes</a></li>
+      <li><a href="/categories/new">Add Category</a></li>
+      <li><a href="/recipes/new">Add Recipe</a></li>
+    </ul>
+
+  </div>
+
+  <div class="off-canvas-content" data-off-canvas-content>
+    <!-- THE page content lives here -->
+<br><br>
 <form action="/searched_recipes" method="post">
   <input type="text" name="searched-recipes" placeholder="Search Recipe by Ingredient">
   <button class="hollow button" href="/">Search</button>
 </form>
+
+<button type="button" class="button" data-toggle="offCanvasLeft">Open Menu</button>
+</div>
+
+<br><br>
+
+@* <div class="row large-up-3">
+  <div class="column column-block">
+    <img src="../Content/img/cosmicPizza.jpg" class="thumbnail" alt="">
+  </div>
+  <div class="column column-block">
+    <img src="//placehold.it/600x600" class="thumbnail" alt="">
+  </div>
+  <div class="column column-block">
+    <img src="//placehold.it/600x600" class="thumbnail" alt="">
+  </div>
+</div> *@

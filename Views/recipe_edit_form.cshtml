@@ -1,6 +1,7 @@
 @{
     Layout = "Shared/_Layout.cshtml";
 }
+
 <h2>Edit Recipe</h2>
 <form action="/recipe/@Model.GetId()/updated" method="post">
   <input type="hidden" name="_method" value="PATCH">

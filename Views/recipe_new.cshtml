@@ -8,18 +8,21 @@
   <textarea id="recipe-instructions" name="recipe-instructions" type="text" placeholder="Recipe Instructions"></textarea>
 
 
-  <label for="recipe-rating">Recipe rating:</label>
-  @* <div class="small-8 columns">
+  @* <label for="recipe-rating">Recipe rating:</label> *@
+  <div class="small-8 columns">
   <div class="slider" data-slider data-initial-start="1">
     <span class="slider-handle"  data-slider-handle role="slider" tabindex="1" aria-controls="sliderOutput1"></span>
     <span class="slider-fill" data-slider-fill></span>
   </div>
 </div>
 <div class="small-2 columns">
-  <input type="number" id="sliderOutput1">
-</div> *@
-  <input id="recipe-rating" name="recipe-rating" type="text">
+  <input type="number" id="sliderOutput1" name="recipe-rating">
+</div>
+  @* <input id="recipe-rating" name="recipe-rating" type="text"> *@
 
   <button type="submit" class="hollow button success">Add</button>
 </form>
-<a href="/" class="hollow button">Home</a>
+<div class="">
+  <a href="/" class="hollow button">Home</a>
+
+</div>
